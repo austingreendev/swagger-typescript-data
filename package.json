@@ -4,11 +4,13 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
+    "start": "npm run swagger && ng serve --proxy-config proxy.conf.json",
+    "build": "npm run swagger && ng build",
+    "test": "npm run swagger && ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "npm run swagger && ng e2e",
+    "swagger": "swagger-codegen generate -i ./server/swagger.json -l typescript-angular2 -o ./src/swagger-data",
+    "example-data": "node ./server/index.js"
   },
   "private": true,
   "dependencies": {
@@ -35,9 +37,9 @@
     "karma": "~1.4.1",
     "karma-chrome-launcher": "~2.1.1",
     "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^0.2.0",
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
-    "karma-coverage-istanbul-reporter": "^0.2.0",
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",

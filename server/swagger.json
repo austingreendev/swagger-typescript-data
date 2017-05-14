@@ -1,0 +1,139 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Example swagger schema for swagger-typescript-data",
+    "version": "1.0.0",
+    "title": "Swagger TypeScript Data Example"
+  },
+  "host": "localhost:4200",
+  "basePath": "/api",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/pet": {
+      "tags": [
+          "pet"
+      ],
+      "get": {
+        "summary": "Retrieve pets by optional type",
+        "description": "Retrieves all pets regardless of type or status.",
+        "operationId": "getPets",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Type of animal to retrieve",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Pet"
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "post": {
+        "summary": "Add a new pet",
+        "description": "",
+        "operationId": "addPet",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Pet object that needs to be added to the store",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          }
+        ],
+        "responses": {
+          "405": {
+            "description": "Invalid input"
+          }
+        },
+        "security": []
+      }
+    },
+    "/pet/{petId}": {
+      "get": {
+        "tags": [
+          "pet"
+        ],
+        "summary": "Find pet by ID",
+        "description": "Returns a single pet",
+        "operationId": "getPetById",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "petId",
+            "in": "path",
+            "description": "ID of pet to return",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Pet"
+            }
+          }
+        },
+        "security": []
+      }
+    }
+  },
+  "securityDefinitions": {},
+  "definitions": {
+    "Pet": {
+      "type": "object",
+      "required": [
+        "id",
+        "name",
+        "color",
+        "type"
+      ],
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64"
+        },
+        "firstName": {
+          "type": "string",
+          "example": "Sullivan"
+        },
+        "lastName": {
+          "type": "string",
+          "example": "Sullivan"
+        },
+        "color": {
+          "type": "string",
+          "example": "Yellow"
+        },
+        "type": {
+          "type": "string",
+          "example": "Dog"
+        }
+      }
+    }
+  }
+}
