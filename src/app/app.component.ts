@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import * as _ from 'lodash';
+import 'rxjs/add/operator/toPromise';
 
-import { Observable } from 'rxjs/Rx';
-
-import { PetApi, DefaultApi, Pet } from 'swagger-data';
+import { PetService, Pet, DetailedPet } from 'swagger-data';
 
 @Component({
   selector: 'app-root',
@@ -11,20 +9,40 @@ import { PetApi, DefaultApi, Pet } from 'swagger-data';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  title = 'Loading...';
+  pets: Pet[];
+  selectedPets: DetailedPet[];
 
-  constructor(private api: DefaultApi, private petsApi: PetApi) {}
+  constructor(private api: PetService) {}
 
   ngOnInit() {
-    this.api.getPets()
-        .subscribe(pets => {
-          const petNames = _.map(pets, pet => pet.firstName + ' ' + pet.lastName);
-          this.title = petNames.join(', ');
-        });
+    this.selectedPets = [];
 
-    this.petsApi.getPetById(1)
-      .subscribe(pet => {
-        console.log(pet);
+    this.api.getPets()
+      .toPromise()
+      .then(pets => {
+        this.pets = pets;
       });
+  }
+
+  loadDetail(selectedPet: Pet) {
+    this.api.getPetById(selectedPet.id)
+      .toPromise()
+      .then(pet => {
+        this.selectedPets.push(pet);
+      });
+  }
+
+  getAverageWeight(pets: DetailedPet[]) {
+    if (pets.length === 0) {
+      return 0;
+    }
+
+    const totalWeight = pets.reduce((current, pet) => current + pet.weight, 0);
+    return totalWeight / pets.length;
+  }
+
+  removeSelection(index: number) {
+    console.log(index);
+    this.selectedPets.splice(index, 1);
   }
 }

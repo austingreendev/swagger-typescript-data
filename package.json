@@ -9,7 +9,7 @@
     "test": "npm run swagger && ng test",
     "lint": "ng lint",
     "e2e": "npm run swagger && ng e2e",
-    "swagger": "swagger-codegen generate -i ./server/swagger.json -l typescript-angular2 -o ./src/swagger-data",
+    "swagger": "java -jar ~/Repos/swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i ./server/swagger.json -l typescript-angular2 -o ./src/swagger-data",
     "example-data": "node ./server/index.js"
   },
   "private": true,

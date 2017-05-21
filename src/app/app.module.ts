@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { PetApi, DefaultApi } from 'swagger-data';
+import { PetService } from 'swagger-data';
 
 import { AppComponent } from './app.component';
 
@@ -16,7 +16,7 @@ import { AppComponent } from './app.component';
     FormsModule,
     HttpModule
   ],
-  providers: [DefaultApi, PetApi],
+  providers: [PetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

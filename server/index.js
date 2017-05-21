@@ -1,49 +1,35 @@
 const express = require('express');
 const app = express();
 
-const ANIMAL_TYPE = {
-    DOG: 'dog',
-    CAT: 'cat'
-};
-
-const COLOR = {
-    BROWN: 'brown',
-    YELLOW: 'yellow'
-};
-
-function createPet(id, firstName, lastName, color, type) {
+function getPet(id) {
     return {
         id,
-        firstName,
-        lastName,
-        color,
-        type
-    }
+        name: `Pet Name ${id}`,
+        createdAt: new Date()
+    };
 }
 
 app.get('/api/pet', (req, res) => {
+    const limit = req.query.limit || 10;
     const pets = [];
 
-    for (let x = 0; x < 5; x++) {
-        const isEven = x % 2 === 0;
-        pets.push(createPet(x + 1, `First${x}`, `Last${x}`,
-            isEven ? COLOR.BROWN : COLOR.YELLOW,
-            isEven ? ANIMAL_TYPE.DOG : ANIMAL_TYPE.CAT));
+    for (let x = 0; x < limit; x++) {
+        pets.push(getPet(x+1));
     }
 
     res.send(pets)
 });
 
 app.get('/api/pet/:petId', (req, res) => {
-    res.send({
-        id: req.params.petId,
-        name: 'Sullivan',
-        color: COLOR.BROWN,
-        type: ANIMAL_TYPE.DOG,
-        description: 'This is a really long description for a pet. ' +
-            'This is a really long description for a pet. This is a ' +
-            'really long description for a pet.'
-    });
+    const petId = req.params.petId;
+    const pet = getPet(petId);
+    pet.description = 'This is a really long description for a pet. ' +
+        'This is a really long description for a pet. This is a ' +
+        'really long description for a pet.';
+    pet.age = petId;
+    pet.weight = petId * 2.64;
+
+    res.send(pet);
 });
 
 app.listen(3500, () => {
