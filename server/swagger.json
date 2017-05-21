@@ -106,7 +106,9 @@
         }, {
           "type": "object",
           "required": [
-            "description"
+            "description",
+            "weight",
+            "age"
           ],
           "properties": {
             "description": {

@@ -5,6 +5,7 @@
 /tmp
 /out-tsc
 /src/swagger-data
+/documentation
 
 # dependencies
 /node_modules
