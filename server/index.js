@@ -5,7 +5,8 @@ function getPet(id) {
     return {
         id,
         name: `Pet Name ${id}`,
-        createdAt: new Date()
+        createdAt: new Date(),
+        type: 'Pet'
     };
 }
 
@@ -28,6 +29,7 @@ app.get('/api/pet/:petId', (req, res) => {
         'really long description for a pet.';
     pet.age = petId;
     pet.weight = petId * 2.64;
+    pet.type = 'DetailedPet';
 
     res.send(pet);
 });

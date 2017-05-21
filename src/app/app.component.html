@@ -21,7 +21,7 @@
 <p>Average Weight: {{ getAverageWeight(selectedPets) | number : '1.2-2' }} lbs</p>
 <ul>
   <li *ngFor="let pet of selectedPets; let i = index;">
-    {{ pet.name }} ({{ pet.weight | number : '1.2-2' }} lbs)
+    {{ pet.name }}
     <a href="#" (click)="removeSelection(i)">Remove</a>
   </li>
 </ul>

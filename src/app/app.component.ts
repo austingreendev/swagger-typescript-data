@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import 'rxjs/add/operator/toPromise';
 
 import { PetService, Pet, DetailedPet } from 'swagger-data';
 
@@ -9,25 +8,21 @@ import { PetService, Pet, DetailedPet } from 'swagger-data';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  pets: Pet[];
-  selectedPets: DetailedPet[];
+  pets: Pet[] = [];
+  selectedPets: DetailedPet[] = [];
 
   constructor(private api: PetService) {}
 
   ngOnInit() {
-    this.selectedPets = [];
-
     this.api.getPets()
-      .toPromise()
-      .then(pets => {
+      .subscribe(pets => {
         this.pets = pets;
       });
   }
 
   loadDetail(selectedPet: Pet) {
     this.api.getPetById(selectedPet.id)
-      .toPromise()
-      .then(pet => {
+      .subscribe(pet => {
         this.selectedPets.push(pet);
       });
   }
@@ -37,12 +32,11 @@ export class AppComponent implements OnInit {
       return 0;
     }
 
-    const totalWeight = pets.reduce((current, pet) => current + pet.weight, 0);
+    const totalWeight = pets.reduce((total, pet) => total + pet.weight, 0);
     return totalWeight / pets.length;
   }
 
   removeSelection(index: number) {
-    console.log(index);
     this.selectedPets.splice(index, 1);
   }
 }

@@ -4,11 +4,12 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run swagger && ng serve --proxy-config proxy.conf.json",
-    "build": "npm run swagger && ng build",
-    "test": "npm run swagger && ng test",
+    "start": "npm run clean && npm run swagger && ng serve --proxy-config proxy.conf.json",
+    "build": "npm run clean && npm run swagger && ng build",
+    "test": "npm run clean && npm run swagger && ng test",
     "lint": "ng lint",
     "e2e": "npm run swagger && ng e2e",
+    "clean": "rimraf ./src/swagger-data && rimraf ./documentation",
     "swagger": "java -jar ~/Repos/swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i ./server/swagger.json -l typescript-angular2 -o ./src/swagger-data",
     "example-data": "node ./server/index.js",
     "documentation": "java -jar ~/Repos/swagger-codegen/modules/swagger-codegen-cli/target/swagger-codegen-cli.jar generate -i ./server/swagger.json -l html2 -o ./documentation && http-server ./documentation"
@@ -43,6 +44,7 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.1.0",
+    "rimraf": "^2.6.1",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
     "typescript": "~2.2.0"

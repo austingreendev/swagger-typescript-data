@@ -79,15 +79,18 @@
   "definitions": {
     "Pet": {
       "type": "object",
+      "discriminator": "type",
       "required": [
         "id",
         "name",
-        "weight"
+        "weight",
+        "type"
       ],
       "properties": {
         "id": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "description": "The unique ID of the pet"
         },
         "name": {
           "type": "string",
@@ -97,6 +100,10 @@
           "type": "string",
           "format": "date",
           "description": "The date of creation of the pet"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of pet"
         }
       }
     },
