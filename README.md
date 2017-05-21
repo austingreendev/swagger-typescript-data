@@ -1,25 +1,25 @@
 # Swagger Typescript Data
 
-Automated API type enforcement with Angular and Swagger OpenAPI specification
+Automated API type enforcement with Angular, TypeScript, and Swagger OpenAPI specification
 
 ## Introduction
 
-This repository contains a demonstration of automatically creating API client libraries from Swagger (OpenAPI) definition files for use in Angular + TypeScript codebases.
+This repository contains a demonstration of automatically generating API client libraries from Swagger (OpenAPI) configurations for use in Angular + TypeScript codebases.
 
 The key benifits of this approach are:
 - Model enforcement between your backend and frontend
     - The models returned from your backend are able to be consumed directly in the frontend.
     - Example: Backend changes the name of a property returned from an endpoint and your frontend build will fail during compilation if the old property is being used (no end-to-end tests necessary).
 - Auotmated creation of your API client libraries
-    - `swagger-codegen` is able to automatically create the client side libraries needed to access your backend.
-    - If one of the pre-made configurations don't match your teams needs, you are able to create customized templates for the creation process.
-    - Example: The API client libraries are created during every frontend build and not put into source control. If backend has changed a route for a backend operation the frontend will continue to build.  If backend removes an entire operation that the frontend is using, the build will fail.
+    - `swagger-codegen` is able to automatically generate the client side libraries needed to access your backend.
+    - If one of the pre-made configurations don't match your needs, you are able to create customized templates for the creation process.
+    - Example: The API client libraries are created during every frontend build and not put into source control. If the backend has modified an existing route frontend will continue to build.  If the backend removes an entire operation that the frontend is using, the build will fail.
 - Other Swagger goodies
     - Automated documentation
     - 20+ automated client library templates available
         - Ruby, C#, JavaScript, Node.js, etc.
 
-*TL;DR: By automatically creating your backend models and API client libraries using Swagger you can add confidence that your frontend is in-sync with your backend while allowing both teams to work in parallel.  All without end-to-end testing.*
+*TL;DR: By automatically creating your backend models and API client libraries using Swagger, you can ensure that your frontend is in-sync with your backend while allowing both teams to work in parallel.  All without end-to-end testing.*
 
 ## Repo Breakdown
 
@@ -33,6 +33,7 @@ This repository contains 2 applications:
 - The `@angular/cli` proxy settings are configured to allow CORS requests to the local express server
 - Modified `package.json` to use `swagger-codegen` during builds
 - `.gitignore` modified to not include auto-generated swagger client
+- Imports the auto-generate swagger service as a global provider
 
 ### Example Express API
 
@@ -71,7 +72,7 @@ swagger-codegen
 ```
 npm run example-data
 ```
-An sample JSON response would be: `http://localhost:3500/api/pet/5`
+A sample JSON response would be: `http://localhost:3500/api/pet/5`
 ```
 {
   "id": "5",
@@ -79,7 +80,8 @@ An sample JSON response would be: `http://localhost:3500/api/pet/5`
   "createdAt": "2017-05-21T20:45:25.427Z",
   "description": "This is a really long description...",
   "age": "5",
-  "weight": 13.2
+  "weight": 13.2,
+  "type": "DetailedPet"
 }
 ```
 
@@ -88,7 +90,7 @@ An sample JSON response would be: `http://localhost:3500/api/pet/5`
 npm start
 ```
 This command does several things:
-1. Cleans previous auto-generated code
+1. Cleans previous `swagger-codegen` auto-generated files
 2. Tells the `swagger-codegen` utility to consume the local swagger configuration at `server/swagger.json` and auto-generate a client library with their `typescript-angular2` template and output this to `src/swagger-data`.
     - This auto-generated template includes an angular `@injectable` service and all of the models (including inheritance) that is defined within your schema.
 3. Starts the angular application in development mode using the angular cli
