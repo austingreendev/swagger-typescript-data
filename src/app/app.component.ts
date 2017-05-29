@@ -5,7 +5,8 @@ import { PetService, Pet, DetailedPet } from 'swagger-data';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [PetService]
 })
 export class AppComponent implements OnInit {
   pets: Pet[] = [];

@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
-import { PetService } from 'swagger-data';
-
 import { AppComponent } from './app.component';
+
+import { ApiModule } from 'swagger-data';
 
 @NgModule({
   declarations: [
@@ -14,9 +14,9 @@ import { AppComponent } from './app.component';
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    ApiModule
   ],
-  providers: [PetService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
