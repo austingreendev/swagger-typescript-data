@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 
-import { PetService, Pet, DetailedPet } from 'swagger-data';
+import { PetApi, Pet, DetailedPet } from 'swagger-data';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.component.css'],
+  providers: [PetApi]
 })
 export class AppComponent implements OnInit {
   pets: Pet[] = [];
   selectedPets: DetailedPet[] = [];
 
-  constructor(private api: PetService) {}
+  constructor(private api: PetApi) {}
 
   ngOnInit() {
     this.api.getPets()
