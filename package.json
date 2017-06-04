@@ -11,7 +11,7 @@
     "e2e": "npm run swagger && ng e2e",
     "clean": "rimraf ./src/swagger-data && rimraf ./documentation",
     "swagger": "java -jar ./swagger/swagger-codegen-cli.jar generate -i ./swagger/swagger.json -l typescript-angular2 -t ./swagger -o ./src/swagger-data",
-    "example-data": "node ./server/index.js",
+    "example-data": "ts-node ./server/index.ts",
     "documentation": "java -jar ./swagger/swagger-codegen-cli.jar generate -i ./swagger/swagger.json -l html2 -o ./documentation && http-server ./documentation"
   },
   "private": true,
@@ -24,6 +24,7 @@
     "@angular/platform-browser": "^4.0.0",
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
+    "@types/express": "^4.0.35",
     "core-js": "^2.4.1",
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4"
