@@ -1,4 +1,4 @@
-import { Pet, DetailedPet } from 'swagger-data/model/models';
+import { Pet, DetailedPet } from 'swagger-data';
 import * as express from 'express';
 const app = express();
 

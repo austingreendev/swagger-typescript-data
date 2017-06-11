@@ -11,7 +11,7 @@
     "e2e": "npm run swagger && ng e2e",
     "clean": "rimraf ./src/swagger-data && rimraf ./documentation",
     "swagger": "java -jar ./swagger/swagger-codegen-cli.jar generate -i ./swagger/swagger.json -l typescript-angular2 -t ./swagger -o ./src/swagger-data",
-    "example-data": "ts-node ./server/index.ts",
+    "example-data": "npm run clean && npm run swagger && ts-node ./server/index.ts",
     "documentation": "java -jar ./swagger/swagger-codegen-cli.jar generate -i ./swagger/swagger.json -l html2 -o ./documentation && http-server ./documentation"
   },
   "private": true,
