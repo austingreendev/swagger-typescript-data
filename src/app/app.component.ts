@@ -14,13 +14,20 @@ export class AppComponent implements OnInit {
 
   constructor(private api: PetService) {}
 
+  /**
+   * On render, we want to display 15 generic pets.
+   */
   ngOnInit() {
-    this.api.getPets()
+    this.api.getPets(15)
       .subscribe(pets => {
         this.pets = pets;
       });
   }
 
+  /**
+   * Retrieve details for the selected pet.
+   * @param selectedPet The generic pet to retrieve details for
+   */
   loadDetail(selectedPet: Pet) {
     this.api.getPetById(selectedPet.id)
       .subscribe(pet => {
@@ -28,6 +35,10 @@ export class AppComponent implements OnInit {
       });
   }
 
+  /**
+   * Calaculates the average weight of a collection of detailed pets.
+   * @param pets Detailed pets to calaculate average weight
+   */
   getAverageWeight(pets: DetailedPet[]) {
     if (pets.length === 0) {
       return 0;
@@ -37,6 +48,10 @@ export class AppComponent implements OnInit {
     return totalWeight / pets.length;
   }
 
+  /**
+   * Removes a detailed pets selection.
+   * @param index The index to remove.
+   */
   removeSelection(index: number) {
     this.selectedPets.splice(index, 1);
   }

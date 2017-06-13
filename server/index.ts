@@ -1,5 +1,6 @@
-import { Pet, DetailedPet } from 'swagger-data';
+import { Pet, DetailedPet } from '../src/swagger-data';
 import * as express from 'express';
+
 const app = express();
 
 function getPet(id: number): Pet {

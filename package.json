@@ -4,15 +4,16 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "npm run clean && npm run swagger && ng serve --proxy-config proxy.conf.json",
-    "build": "npm run clean && npm run swagger && ng build",
-    "test": "npm run clean && npm run swagger && ng test",
+    "start": "npm run swagger && ng serve --proxy-config proxy.conf.json",
+    "build": "npm run swagger && ng build",
+    "test": "npm run swagger && ng test",
     "lint": "ng lint",
     "e2e": "npm run swagger && ng e2e",
     "clean": "rimraf ./src/swagger-data && rimraf ./documentation",
-    "swagger": "java -jar ./swagger/swagger-codegen-cli.jar generate -i ./swagger/swagger.json -l typescript-angular2 -t ./swagger -o ./src/swagger-data",
-    "example-data": "npm run clean && npm run swagger && ts-node ./server/index.ts",
-    "documentation": "java -jar ./swagger/swagger-codegen-cli.jar generate -i ./swagger/swagger.json -l html2 -o ./documentation && http-server ./documentation"
+    "swagger-codegen": "java -jar ./server/swagger-codegen-cli.jar generate -i ./server/swagger.json -l typescript-angular2 -t ./server -o ./src/swagger-data",
+    "swagger": "npm run clean && npm run swagger-codegen",
+    "documentation": "java -jar ./server/swagger-codegen-cli.jar generate -i ./server/swagger.json -l html2 -o ./documentation && http-server ./documentation",
+    "example-data": "npm run swagger && ts-node ./server/index.ts"
   },
   "private": true,
   "dependencies": {
