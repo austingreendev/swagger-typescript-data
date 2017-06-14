@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-// import { PetService, Pet, DetailedPet } from 'swagger-data';
+import { PetService, Pet, DetailedPet } from 'swagger-data';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +12,7 @@ export class AppComponent implements OnInit {
   pets: Pet[] = [];
   selectedPets: DetailedPet[] = [];
 
-  constructor() {}
-  // constructor(private api: PetService) {}
+  constructor(private api: PetService) {}
 
   /**
    * On render, we want to display 15 generic pets.
@@ -30,10 +29,10 @@ export class AppComponent implements OnInit {
    * @param selectedPet The generic pet to retrieve details for
    */
   loadDetail(selectedPet: Pet) {
-    // this.api.getPetById(selectedPet.id)
-    //   .subscribe(pet => {
-    //     this.selectedPets.push(pet);
-    //   });
+    this.api.getPetById(selectedPet.id)
+      .subscribe(pet => {
+        this.selectedPets.push(pet);
+      });
   }
 
   /**
