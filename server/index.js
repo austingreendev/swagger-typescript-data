@@ -1,9 +1,7 @@
-import { Pet, DetailedPet } from '../src/swagger-data';
-import * as express from 'express';
-
+const express = require('express');
 const app = express();
 
-function getPet(id: number): Pet {
+function getPet(id) {
     return {
         id,
         name: `Pet Name ${id}`,
@@ -13,8 +11,8 @@ function getPet(id: number): Pet {
 }
 
 app.get('/api/pet', (req, res) => {
-    const limit: number = req.query.limit || 10;
-    const pets: Pet[] = [];
+    const limit = req.query.limit || 10;
+    const pets = [];
 
     for (let x = 0; x < limit; x++) {
         pets.push(getPet(x + 1));
@@ -24,8 +22,8 @@ app.get('/api/pet', (req, res) => {
 });
 
 app.get('/api/pet/:petId', (req, res) => {
-    const petId: number = req.params.petId;
-    const pet = getPet(petId) as DetailedPet;
+    const petId = req.params.petId;
+    const pet = getPet(petId);
     pet.description = 'This is a really long description for a pet. ' +
         'This is a really long description for a pet. This is a ' +
         'really long description for a pet.';

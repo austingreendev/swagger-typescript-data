@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
    * @param selectedPet The generic pet to retrieve details for
    */
   loadDetail(selectedPet: Pet) {
-    this.api.getPetById(selectedPet.id)
+    this.api.getDetailedPetById(selectedPet.id)
       .subscribe(pet => {
         this.selectedPets.push(pet);
       });

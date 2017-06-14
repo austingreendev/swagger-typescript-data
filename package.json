@@ -13,7 +13,7 @@
     "swagger-codegen": "java -jar ./server/swagger-codegen-cli.jar generate -i ./server/swagger.json -l typescript-angular2 -t ./server -o ./src/swagger-data",
     "swagger": "npm run clean && npm run swagger-codegen",
     "documentation": "java -jar ./server/swagger-codegen-cli.jar generate -i ./server/swagger.json -l html2 -o ./documentation && http-server ./documentation",
-    "example-data": "npm run swagger && ts-node ./server/index.ts"
+    "example-data": "node ./server/index.js"
   },
   "private": true,
   "dependencies": {

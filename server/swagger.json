@@ -7,29 +7,23 @@
   },
   "host": "localhost:4200",
   "basePath": "/api",
-  "schemes": [
-    "http"
-  ],
+  "schemes": ["http"],
   "paths": {
     "/pet": {
       "get": {
-        "tags": [
-            "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Retrieve pets",
         "description": "Retrieves all pets.",
         "operationId": "getPets",
         "produces": ["application/json"],
-        "parameters": [
-          {
+        "parameters": [{
             "name": "limit",
             "in": "query",
             "description": "The number of pets to return. 10 by default.",
             "required": false,
             "type": "integer",
             "format": "int32"
-          }
-        ],
+        }],
         "responses": {
           "200": {
             "description": "Successful operation",
@@ -46,23 +40,19 @@
     },
     "/pet/{petId}": {
       "get": {
-        "tags": [
-          "pet"
-        ],
+        "tags": ["pet"],
         "summary": "Find pet by ID",
         "description": "Returns a single pet",
-        "operationId": "getPetById",
+        "operationId": "getDetailedPetById",
         "produces": ["application/json"],
-        "parameters": [
-          {
-            "name": "petId",
-            "in": "path",
-            "description": "ID of the pet to return",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
+        "parameters": [{
+          "name": "petId",
+          "in": "path",
+          "description": "ID of the pet to return",
+          "required": true,
+          "type": "integer",
+          "format": "int64"
+        }],
         "responses": {
           "200": {
             "description": "successful operation",
